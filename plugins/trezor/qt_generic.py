@@ -4,14 +4,14 @@ import threading
 from PyQt5.Qt import Qt
 from PyQt5.Qt import QGridLayout, QInputDialog, QPushButton
 from PyQt5.Qt import QVBoxLayout, QLabel
-from electrum_ltc_gui.qt.util import *
+from gui.qt.util import *
 from .plugin import TIM_NEW, TIM_RECOVER, TIM_MNEMONIC
 from ..hw_wallet.qt import QtHandlerBase, QtPluginBase
 
-from electrum_ltc.i18n import _
-from electrum_ltc.plugins import hook, DeviceMgr
-from electrum_ltc.util import PrintError, UserCancelled, bh2u
-from electrum_ltc.wallet import Wallet, Standard_Wallet
+from lib.i18n import _
+from lib.plugins import hook, DeviceMgr
+from lib.util import PrintError, UserCancelled, bh2u
+from lib.wallet import Wallet, Standard_Wallet
 
 PASSPHRASE_HELP_SHORT =_(
     "Passphrases allow you to access new wallets, each "

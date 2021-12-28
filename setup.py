@@ -42,7 +42,7 @@ if platform.system() in ['Linux', 'FreeBSD', 'DragonFly']:
 
 extras_require = {
     'hardware': requirements_hw,
-    'fast': ['pycryptodomex', 'scrypt>=0.6.0'],
+    'full': ['pycryptodomex', 'scrypt>=0.6.0'],
     ':python_version < "3.5"': ['typing>=3.0.0'],
 }
 extras_require['full'] = extras_require['hardware'] + extras_require['fast']
@@ -54,30 +54,30 @@ setup(
     install_requires=requirements,
     extras_require=extras_require,
     packages=[
-        'electrum_ltc',
-        'electrum_ltc_gui',
-        'electrum_ltc_gui.qt',
-        'electrum_ltc_plugins',
-        'electrum_ltc_plugins.audio_modem',
-        'electrum_ltc_plugins.cosigner_pool',
-        'electrum_ltc_plugins.email_requests',
-        'electrum_ltc_plugins.hw_wallet',
-        'electrum_ltc_plugins.keepkey',
-        'electrum_ltc_plugins.labels',
-        'electrum_ltc_plugins.ledger',
-        'electrum_ltc_plugins.revealer',
-        'electrum_ltc_plugins.trezor',
-        'electrum_ltc_plugins.digitalbitbox',
-        'electrum_ltc_plugins.virtualkeyboard',
+        'lib',
+        'gui',
+        'gui.qt',
+        'plugins',
+        'plugins.audio_modem',
+        'plugins.cosigner_pool',
+        'plugins.email_requests',
+        'plugins.hw_wallet',
+        'plugins.keepkey',
+        'plugins.labels',
+        'plugins.ledger',
+        'plugins.revealer',
+        'plugins.trezor',
+        'plugins.digitalbitbox',
+        'plugins.virtualkeyboard',
     ],
     package_dir={
-        'electrum_ltc': 'lib',
-        'electrum_ltc_gui': 'gui',
-        'electrum_ltc_plugins': 'plugins',
+        'lib': 'lib',
+        'gui': 'gui',
+        'plugins': 'plugins',
     },
     package_data={
         '': ['*.txt', '*.json', '*.ttf', '*.otf'],
-        'electrum_ltc': [
+        'lib': [
             'wordlist/*.txt',
             'locale/*/LC_MESSAGES/garlium.mo',
         ]

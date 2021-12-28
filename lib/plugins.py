@@ -22,6 +22,7 @@
 # ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 # CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+import importlib
 from collections import namedtuple
 import traceback
 import sys
@@ -31,6 +32,7 @@ import pkgutil
 import time
 import threading
 
+import plugins
 from .util import print_error
 from .i18n import _
 from .util import profiler, PrintError, DaemonThread, UserCancelled, ThreadJob
@@ -46,11 +48,6 @@ class Plugins(DaemonThread):
     @profiler
     def __init__(self, config, is_local, gui_name):
         DaemonThread.__init__(self)
-        if is_local:
-            find = imp.find_module('plugins')
-            plugins = imp.load_module('electum_ltc_plugins', *find)
-        else:
-            import electrum_ltc_plugins as plugins
         self.pkgpath = os.path.dirname(plugins.__file__)
         self.config = config
         self.hw_wallets = {}
@@ -67,6 +64,7 @@ class Plugins(DaemonThread):
             # do not load deprecated plugins
             if name in ['plot', 'exchange_rate']:
                 continue
+
             m = loader.find_module(name).load_module(name)
             d = m.__dict__
             gui_good = self.gui_name in d.get('available_for', [])
@@ -95,7 +93,7 @@ class Plugins(DaemonThread):
     def load_plugin(self, name):
         if name in self.plugins:
             return self.plugins[name]
-        full_name = 'electrum_ltc_plugins.' + name + '.' + self.gui_name
+        full_name = 'plugins.' + name + '.' + self.gui_name
         loader = pkgutil.find_loader(full_name)
         if not loader:
             raise RuntimeError("%s implementation for %s plugin not found"

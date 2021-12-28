@@ -1,4 +1,4 @@
-from electrum_ltc.util import PrintError
+from lib.util import PrintError
 
 
 class TrezorTransport(PrintError):
@@ -20,17 +20,17 @@ class TrezorTransport(PrintError):
             #except BaseException:
             #    pass
             try:
-                from trezorlib.transport_hid import HidTransport
+                from trezorlib import HidTransport
                 transports.append(HidTransport)
             except BaseException:
                 pass
             try:
-                from trezorlib.transport_udp import UdpTransport
+                from trezorlib import UdpTransport
                 transports.append(UdpTransport)
             except BaseException:
                 pass
             try:
-                from trezorlib.transport_webusb import WebUsbTransport
+                from trezorlib import WebUsbTransport
                 transports.append(WebUsbTransport)
             except BaseException:
                 pass

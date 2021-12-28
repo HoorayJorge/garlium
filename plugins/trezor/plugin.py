@@ -2,14 +2,14 @@ import threading
 
 from binascii import hexlify, unhexlify
 
-from electrum_ltc import constants
-from electrum_ltc.util import bfh, bh2u
-from electrum_ltc.bitcoin import (b58_address_to_hash160, xpub_from_pubkey,
+from lib import constants
+from lib.util import bfh, bh2u
+from lib.bitcoin import (b58_address_to_hash160, xpub_from_pubkey,
                                   TYPE_ADDRESS, TYPE_SCRIPT)
-from electrum_ltc.i18n import _
-from electrum_ltc.plugins import BasePlugin
-from electrum_ltc.transaction import deserialize
-from electrum_ltc.keystore import Hardware_KeyStore, is_xpubkey, parse_xpubkey
+from lib.i18n import _
+from lib.plugins import BasePlugin
+from lib.transaction import deserialize
+from lib.keystore import Hardware_KeyStore, is_xpubkey, parse_xpubkey
 
 from ..hw_wallet import HW_PluginBase
 
